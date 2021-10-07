@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('whatsapp', [MessagingController::class, 'sendWhatsappMessage']);
-Route::post('sms', [MessagingController::class, 'sendSmsMessage']);
+Route::post('send-whatsapp', [MessagingController::class, 'sendWhatsappMessage']);
+Route::post('send-sms', [MessagingController::class, 'sendSmsMessage']);
+Route::post('sms', [MessagingController::class, 'receiveSmsMessage']);

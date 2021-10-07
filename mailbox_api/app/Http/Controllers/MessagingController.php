@@ -32,7 +32,7 @@ class MessagingController extends Controller
 
         $response = [
             "messageTwilioId" => $messageTwilio->sid,
-            "content" => "Message to Whatsapp send successfully"
+            "message" => "Message to Whatsapp send successfully"
         ];
 
         return response($response, Response::HTTP_OK);
@@ -48,10 +48,22 @@ class MessagingController extends Controller
 
         $response = [
             "messageTwilioId" => $messageTwilio->sid,
-            "content" => "Message to SMS send successfully"
+            "message" => "Message to SMS send successfully"
         ];
 
         return response($response, Response::HTTP_OK);
+    }
+
+    public function receiveSmsMessage(Request $request){
+        
+        $fromNumberUser = $request->input('from');
+        $message = $request->input('body');
+
+        $receiveMessage = $this->twilioService->receiveSmsMessage($fromNumberUser, $message);
+        
+        $request->headers->set('Content-Type', 'text/xml');
+
+        return response((string)$receiveMessage, Response::HTTP_OK);
     }
 
 }

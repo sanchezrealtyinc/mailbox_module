@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Twilio\Rest\Client;
+use Twilio\TwiML\MessagingResponse;
 
 class TwilioService {
 
@@ -48,8 +49,8 @@ class TwilioService {
     
     /*
     * Send message for whatsapp to user using twilio programmable 
-    * @param String $message (Body of message) 
-    * @param String $phoneNumberUser (Phone number of user)
+    * @param string $message (Body of message) 
+    * @param string $phoneNumberUser (Phone number of user)
     */
     public function sendWhatsappMessage($message, $phoneNumberUser) {
         
@@ -63,8 +64,8 @@ class TwilioService {
 
     /*
     * Send message for SMS to user using twilio programmable 
-    * @param String $message (Body of message) 
-    * @param String $phoneNumberUser (Phone number of user)
+    * @param string $message (Body of message) 
+    * @param string $phoneNumberUser (Phone number of user)
     */
     public function sendSmsMessage($message, $phoneNumberUser) {
         
@@ -75,6 +76,20 @@ class TwilioService {
         ]);
 
         return $messageTwilio;
+    }
+
+    /*
+    * Message receive for SMS to user using twilio programmable 
+    * @param string $message (Body of message) 
+    * @param string $from (Phone number of user)
+    */
+    public function receiveSmsMessage($from, $message){
+        $twiml = new MessagingResponse();
+
+        //TODO: Save to Databasse
+        //dd($twiml, $from, $message);
+
+        return $twiml;
     }
     
 }
